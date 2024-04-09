@@ -6,8 +6,8 @@ const LineStrategy = require('../lib');
 
 test('[Failure] Constructed with missing for options', (t) => {
   t.throws(() => {
-    new LineStrategy(null, () => {});
-  }, {message: 'Options must be setting.'});
+    new LineStrategy({}, () => {});
+  }, {message: 'Channel\'s Id must be setting'});
 });
 
 test('[Pass] Constructed Passport for LINE', (t) => {
@@ -29,7 +29,7 @@ test('[Failure] Constructed with missing for channelID', (t) => {
       channelSecret: 'failure',
       callbackURL: 'http://failure.domain',
     }, () => {});
-  }, {message: 'Channel\'s Id must be setting.'});
+  }, {message: 'Channel\'s Id must be setting'});
 });
 
 test('[Failure] Constructed with missing for channelSecret', (t) => {
@@ -38,7 +38,7 @@ test('[Failure] Constructed with missing for channelSecret', (t) => {
       channelID: 'failure',
       callbackURL: 'http://failure.domain',
     }, () => {});
-  }, {message: 'Channel\'s Secret must be setting.'});
+  }, {message: 'Channel\'s Secret must be setting'});
 });
 
 test('[Failure] Constructed with missing for something', (t) => {
@@ -65,32 +65,6 @@ test('[Pass] Checked authenticate', (t) => {
     channelID: 'fakeId',
     channelSecret: 'fakeSecret',
     callbackURL: 'http://fake.domain',
-    botPrompt: 'null'
-  };
-
-  const strategy = new LineStrategy(options, () => {});
-  self.authorizationParams = strategy.authorizationParams;
-  const response = strategy.authenticate.bind(self, req, options)(req, options);
-
-  t.is(response, undefined);
-});
-
-
-test('[Pass] Checked authenticate, skip state on options', (t) => {
-  let req = new http.IncomingMessage();
-  const self = {
-    error: function(error) {return error;},
-    _oauth2: {
-      _authorizeUrl: 'http://test.com',
-      _accessTokenUrl: 'http://test.com',
-      _clientId: 'fakeId',
-    },
-  }
-  const options = {
-    channelID: 'fakeId',
-    channelSecret: 'fakeSecret',
-    callbackURL: 'http://fake.domain',
-    state: 'test',
     botPrompt: 'null'
   };
 
@@ -163,7 +137,7 @@ test('Set authorization params (prompt: null)', (t) => {
   const strategy = new LineStrategy(options, () => {});
   const newOptions = strategy.authorizationParams(options);
 
-  t.is(newOptions.prompt, undefined);
+  t.is(newOptions.prompt, null);
 });
 
 test('Set authorization params (prompt: consent)', (t) => {

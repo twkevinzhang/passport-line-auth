@@ -1,0 +1,18 @@
+git d.*.swp
+._*
+.DS_Store
+.git
+.github
+.hg
+.npmrc
+.lock-wscript
+.svn
+.wafpickle-*
+config.gypi
+CVS
+npm-debug.log
+yarn-error.log
+
+example/
+test/
+ava.config.js

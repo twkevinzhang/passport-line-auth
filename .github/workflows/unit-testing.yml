@@ -1,0 +1,41 @@
+name: Checks
+on: ["pull_request"]
+
+jobs:
+  testing:
+    name: Testing
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node: [14, 16, 18, 19]
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node}}
+          cache: 'yarn'
+      - name: Run testing
+        run: |
+          yarn install
+          npm test
+  code-coverage:
+    name: Code coverage
+    needs: testing
+    runs-on: ubuntu-20.04
+    env:
+      CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+      - name: Publish coverage
+        run: |
+          yarn install
+          npm run coverage
+          npm run codecov

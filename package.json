@@ -1,0 +1,48 @@
+{
+  "name": "passport-line-auth",
+  "version": "0.2.10",
+  "description": "Line Authentication Strategy for Passport",
+  "main": "./lib",
+  "scripts": {
+    "start": "node ./example/app.js",
+    "test": "ava --verbose",
+    "coverage": "rm -rf .nyc_output && nyc ava",
+    "codecov": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/IvanWei/passport-line-auth.git"
+  },
+  "keywords": [
+    "line",
+    "passport",
+    "identity",
+    "auth",
+    "authentication"
+  ],
+  "author": "Ivan Wei <scorpionseed@gmail.com> (https://blog.ivanwei.co)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IvanWei/passport-line-auth/issues"
+  },
+  "homepage": "https://github.com/IvanWei/passport-line-auth#readme",
+  "engines": {
+    "node": ">= 0.4.0",
+    "yarn": ">= 0.8.0"
+  },
+  "dependencies": {
+    "passport-oauth2": "^1.6.1"
+  },
+  "devDependencies": {
+    "ava": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "codecov": "^3.8.3",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "nyc": "^15.1.0",
+    "passport": "^0.6.0",
+    "pug": "^3.0.2"
+  },
+  "packageManager": "yarn@3.3.0"
+}
